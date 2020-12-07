@@ -60,7 +60,12 @@ def play(starting_player, name1, name2):
     valid_input = False
     while not valid_input:
         choice = input(starting_player + ": ")
+        try:
+            choice = int(choice)
+        except ValueError:
+            choice = input("Please choose an integer between 1 and 9")
         if choice <= 0 or choice >= 10:
+
 
 
 
