@@ -1,10 +1,27 @@
 import random
 
+board = ["--", "--", "--"]
+
+#========================== HELPER FUNCTIONS ===========================
+
+#making check_input usable for both strings and ints, replace flip coin check input with a function call to this one after made more flexible
+def check_input(user_input, minimum, maximum):
+    if str(minimum) == minimum:
+
+    else:
+        try:
+            user_input = int(user_input)
+            if user_input <= minimum or user_input >= maximum):
+                user_input = input("Please choose an integer between " + minimum + " and " + maximum)
+        except ValueError:
+            user_input = input("Please choose an integer between " + minimum + " and " + maximum)
+
 
 def valid_coin_flip(user_input):
     if user_input.lower() != "heads" and user_input.lower() != "tails":
         return False
     return True
+
 
 
 def flip_coin(name1, name2):
@@ -34,6 +51,7 @@ def flip_coin(name1, name2):
             return name1
 
 
+#========================== ACTUAL GAME =================================
 def start():
     print("Each -- is an empty 'box'. Each box corresponds to a number, starting at 1 in the top left box, then going\
  from left to right. ")
@@ -43,12 +61,10 @@ def start():
     end = False
     #while not end:
 
-
-
     #make board public, make board not constrained to 3 'boxes', instead, num of boxes based on user input
 
 def create_board():
-    board = ["--", "--", "--"]
+    # board = ["--", "--", "--"]
     print("__________")
     for i in range(len(board)):
         for i in range(len(board)):
@@ -67,13 +83,14 @@ def play(starting_player, name1, name2):
     valid_input = False
     while not valid_input:
         choice = input(starting_player + ": ")
-        try:
-            choice = int(choice)
-            if choice <= 0 or choice >= len(board) * len(board):
-                choice = input("Please choose an integer between 1 and 9")
-
-        except ValueError:
-            choice = input("Please choose an integer between 1 and 9")
+        # try:
+        #     choice = int(choice)
+        #     if choice <= 0 or choice >= len(board) * len(board):
+        #         choice = input("Please choose an integer between 1 and 9")
+        #
+        # except ValueError:
+        #     choice = input("Please choose an integer between 1 and 9")
+        check_input(choice, 0, len(board) * len(board))
 
 
 
