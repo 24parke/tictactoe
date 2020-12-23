@@ -2,26 +2,35 @@ import random
 
 board = ["--", "--", "--"]
 
-#========================== HELPER FUNCTIONS ===========================
+# ========================== HELPER FUNCTIONS ===========================
 
-#making check_input usable for both strings and ints, replace flip coin check input with a function call to this one after made more flexible
+# making check_input usable for both strings and ints, replace flip coin check input with a function call to this one
+# after made more flexible
+
+
 def check_input(user_input, minimum, maximum):
-    if str(minimum) == minimum:
-
-    else:
-        try:
-            user_input = int(user_input)
-            if user_input <= minimum or user_input >= maximum):
+    valid_input = False
+    if str(minimum) == minimum and str(maximum) == maximum:
+        while not valid_input:
+            if user_input.lower() != minimum and user_input.lower() != maximum:
+                user_input = input("Please choose either " + minimum + " or " + maximum + ".")
+            else:
+                return user_input
+    elif int(minimum) == minimum and int(maximum) == maximum:
+        while not valid_input:
+            try:
+                user_input = int(user_input)
+                if user_input <= minimum or user_input >= maximum:
+                    user_input = input("Please choose an integer between " + minimum + " and " + maximum)
+            except ValueError:
                 user_input = input("Please choose an integer between " + minimum + " and " + maximum)
-        except ValueError:
-            user_input = input("Please choose an integer between " + minimum + " and " + maximum)
+
 
 
 def valid_coin_flip(user_input):
     if user_input.lower() != "heads" and user_input.lower() != "tails":
         return False
     return True
-
 
 
 def flip_coin(name1, name2):
