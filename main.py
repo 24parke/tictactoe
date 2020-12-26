@@ -22,9 +22,10 @@ def check_input(user_input, minimum, maximum):
                 user_input = int(user_input)
                 if user_input <= minimum or user_input >= maximum:
                     user_input = input("Please choose an integer between " + minimum + " and " + maximum)
+                else:
+                    return user_input
             except ValueError:
                 user_input = input("Please choose an integer between " + minimum + " and " + maximum)
-
 
 
 def valid_coin_flip(user_input):
@@ -34,7 +35,7 @@ def valid_coin_flip(user_input):
 
 
 def flip_coin(name1, name2):
-    valid_input = False
+    # valid_input = False
     if random.randint(1, 2) == 1: coin = "heads"
     else: coin = "tails"
     if random.randint(1, 2) == 1:
@@ -43,24 +44,26 @@ def flip_coin(name1, name2):
     else:
         user_input = input(name2 + " choose heads or tails: ")
         user = name2
-    while not valid_input:
-        if user_input.lower() != "heads" and user_input.lower() != "tails":
-            user_input = input("invalid input, try again. heads or tails: ")
-        else: valid_input = True
-        # heads = 1, tails = 2
-    if coin == user_input:
-        print("It was " + coin + ", " + user + " goes first!")
-        return user
-    else:
-        if user == name1:
-            print("It was " + coin + ", " + name2 + " goes first!")
-            return name2
-        else:
-            print("It was " + coin + ", " + name1 + " goes first!")
-            return name1
+    # while not valid_input:
+    #     if user_input.lower() != "heads" and user_input.lower() != "tails":
+    #         user_input = input("invalid input, try again. heads or tails: ")
+    #     else: valid_input = True
+    #     # heads = 1, tails = 2
+    # if coin == user_input:
+    #     print("It was " + coin + ", " + user + " goes first!")
+    #     return user
+    # else:
+    #     if user == name1:
+    #         print("It was " + coin + ", " + name2 + " goes first!")
+    #         return name2
+    #     else:
+    #         print("It was " + coin + ", " + name1 + " goes first!")
+    #         return name1
+
+    check_input(user_input)
 
 
-#========================== ACTUAL GAME =================================
+# ========================== ACTUAL GAME =================================
 def start():
     print("Each -- is an empty 'box'. Each box corresponds to a number, starting at 1 in the top left box, then going\
  from left to right. ")
@@ -68,9 +71,11 @@ def start():
     p2 = input("Player 2 name: ")
     create_board()
     end = False
-    #while not end:
 
-    #make board public, make board not constrained to 3 'boxes', instead, num of boxes based on user input
+# while not end:
+
+# make board public, make board not constrained to 3 'boxes', instead, num of boxes based on user input
+
 
 def create_board():
     # board = ["--", "--", "--"]
@@ -100,9 +105,6 @@ def play(starting_player, name1, name2):
         # except ValueError:
         #     choice = input("Please choose an integer between 1 and 9")
         check_input(choice, 0, len(board) * len(board))
-
-
-
 
 
 create_board()
