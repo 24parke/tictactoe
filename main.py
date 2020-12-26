@@ -1,9 +1,8 @@
 import random
 
-board = ["--", "--", "--"]
+# board = ["--", "--", "--"]
 
-board1 = [["--"] * 3] * 3
-print(board1)
+board
 
 # ========================== HELPER FUNCTIONS ===========================
 
@@ -18,7 +17,7 @@ def check_input(user_input, minimum, maximum):
             if user_input.lower() != minimum and user_input.lower() != maximum:
                 user_input = input("Please choose either " + minimum + " or " + maximum + ". ")
             else:
-                return user_input
+                return int(user_input)
     elif int(minimum) == minimum and int(maximum) == maximum:
         while not valid_input:
             try:
@@ -26,7 +25,7 @@ def check_input(user_input, minimum, maximum):
                 if user_input <= minimum or user_input >= maximum:
                     user_input = input("Please choose an integer between " + minimum + " and " + maximum)
                 else:
-                    return user_input
+                    return str(user_input)
             except ValueError:
                 user_input = input("Please choose an integer between " + minimum + " and " + maximum)
 
@@ -68,15 +67,20 @@ def start():
 # def place_move():
 #
 
+
 def create_board():
     # board = ["--", "--", "--"]
+    size = input("Size of board: ")
+    size = check_input(size, 1, 9)
+    global board = [["--"] * size] * size
+
     print("__________")
-    for i in range(len(board)):
-        for i in range(len(board)):
-            if i == len(board) - 1:
-                print("|" + board[i] + "|" + "\n", end="")
+    for i in range(size):
+        for i in range(size):
+            if i == size - 1:
+                print("|" + "--" + "|" + "\n", end="")
             else:
-                print("|" + board[i], end="")
+                print("|" + "--", end="")
     print("----------\n")
     # print("--------")
     # for i in range(3):
