@@ -2,6 +2,9 @@ import random
 
 board = ["--", "--", "--"]
 
+board1 = [["--"] * 3] * 3
+print(board1)
+
 # ========================== HELPER FUNCTIONS ===========================
 
 # making check_input usable for both strings and ints, replace flip coin check input with a function call to this one
@@ -13,7 +16,7 @@ def check_input(user_input, minimum, maximum):
     if str(minimum) == minimum and str(maximum) == maximum:
         while not valid_input:
             if user_input.lower() != minimum and user_input.lower() != maximum:
-                user_input = input("Please choose either " + minimum + " or " + maximum + ".")
+                user_input = input("Please choose either " + minimum + " or " + maximum + ". ")
             else:
                 return user_input
     elif int(minimum) == minimum and int(maximum) == maximum:
@@ -38,39 +41,32 @@ def flip_coin(name1, name2):
     else:
         user_input = input(name2 + " choose heads or tails: ")
         user = name2
-    # while not valid_input:
-    #     if user_input.lower() != "heads" and user_input.lower() != "tails":
-    #         user_input = input("invalid input, try again. heads or tails: ")
-    #     else: valid_input = True
-    #     # heads = 1, tails = 2
-    # if coin == user_input:
-    #     print("It was " + coin + ", " + user + " goes first!")
-    #     return user
-    # else:
-    #     if user == name1:
-    #         print("It was " + coin + ", " + name2 + " goes first!")
-    #         return name2
-    #     else:
-    #         print("It was " + coin + ", " + name1 + " goes first!")
-    #         return name1
-
-    user_input = check_input(user_input)
+    user_input = check_input(user_input, "heads", "tails")
+    if coin == user_input:
+        print("It was " + user_input + ", " + user + " goes first!")
+        return user
+    else:
+        if user == name1:
+            print("It was " + coin + ", " + name2 + " goes first!")
+        else:
+            print("It was " + coin + ", " + name1 + " goes first!")
 
 
 # ========================== ACTUAL GAME =================================
 def start():
     print("Each -- is an empty 'box'. Each box corresponds to a number, starting at 1 in the top left box, then going\
  from left to right. ")
+    create_board()
     p1 = input("Player 1 name: ")
     p2 = input("Player 2 name: ")
-    flip
-    create_board()
+    flip_coin(p1, p2)
     end = False
 
 # while not end:
 
 # make board public, make board not constrained to 3 'boxes', instead, num of boxes based on user input
-
+# def place_move():
+#
 
 def create_board():
     # board = ["--", "--", "--"]
@@ -78,9 +74,9 @@ def create_board():
     for i in range(len(board)):
         for i in range(len(board)):
             if i == len(board) - 1:
-                print("|" + board[i] + "|" + "\n", end = "")
+                print("|" + board[i] + "|" + "\n", end="")
             else:
-                print("|" + board[i], end = "")
+                print("|" + board[i], end="")
     print("----------\n")
     # print("--------")
     # for i in range(3):
