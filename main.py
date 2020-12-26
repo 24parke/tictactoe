@@ -28,12 +28,6 @@ def check_input(user_input, minimum, maximum):
                 user_input = input("Please choose an integer between " + minimum + " and " + maximum)
 
 
-def valid_coin_flip(user_input):
-    if user_input.lower() != "heads" and user_input.lower() != "tails":
-        return False
-    return True
-
-
 def flip_coin(name1, name2):
     # valid_input = False
     if random.randint(1, 2) == 1: coin = "heads"
@@ -60,7 +54,7 @@ def flip_coin(name1, name2):
     #         print("It was " + coin + ", " + name1 + " goes first!")
     #         return name1
 
-    check_input(user_input)
+    user_input = check_input(user_input)
 
 
 # ========================== ACTUAL GAME =================================
@@ -69,6 +63,7 @@ def start():
  from left to right. ")
     p1 = input("Player 1 name: ")
     p2 = input("Player 2 name: ")
+    flip
     create_board()
     end = False
 
@@ -105,7 +100,6 @@ def play(starting_player, name1, name2):
         # except ValueError:
         #     choice = input("Please choose an integer between 1 and 9")
         check_input(choice, 0, len(board) * len(board))
-
 
 create_board()
 start()
