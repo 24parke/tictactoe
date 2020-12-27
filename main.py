@@ -78,11 +78,11 @@ def print_board():
     # print("__________")
     global board
 
-    print(int(math.sqrt(len(board))))
-    for i in range(int(math.sqrt(len(board)))):
-        for a in range(int(math.sqrt(len(board)))):
+    print(int(len(board)))
+    for i in range(int(len(board))):
+        for a in range(int(len(board))):
             # if a == int(math.sqrt(len(board)))
-            if a == int(math.sqrt(len(board))) - 1:
+            if a == int(len(board)) - 1:
                 print("|" + "--" + "|" + "\n", end="")
             else:
                 print("|" + "--", end="")
