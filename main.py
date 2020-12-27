@@ -1,13 +1,9 @@
 import random
+import math
 
-# board = ["--", "--", "--"]
-
-board
+global board
 
 # ========================== HELPER FUNCTIONS ===========================
-
-# making check_input usable for both strings and ints, replace flip coin check input with a function call to this one
-# after made more flexible
 
 
 def check_input(user_input, minimum, maximum):
@@ -72,20 +68,25 @@ def create_board():
     # board = ["--", "--", "--"]
     size = input("Size of board: ")
     size = check_input(size, 1, 9)
-    global board = [["--"] * size] * size
+    global board
+    board = [["--"] * int(size)] * int(size)
+    print(size + str(board))
+    print_board()
 
-    print("__________")
-    for i in range(size):
-        for i in range(size):
-            if i == size - 1:
+
+def print_board():
+    # print("__________")
+    global board
+
+    print(int(math.sqrt(len(board))))
+    for i in range(int(math.sqrt(len(board)))):
+        for a in range(int(math.sqrt(len(board)))):
+            # if a == int(math.sqrt(len(board)))
+            if a == int(math.sqrt(len(board))) - 1:
                 print("|" + "--" + "|" + "\n", end="")
             else:
                 print("|" + "--", end="")
-    print("----------\n")
-    # print("--------")
-    # for i in range(3):
-    #     print("--|--|--")
-    # print("--------")
+    # print("----------\n")
 
 
 def play(starting_player, name1, name2):
@@ -101,7 +102,7 @@ def play(starting_player, name1, name2):
         #     choice = input("Please choose an integer between 1 and 9")
         check_input(choice, 0, len(board) * len(board))
 
-create_board()
+
 start()
 
 
