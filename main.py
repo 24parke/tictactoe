@@ -13,7 +13,7 @@ def check_input(user_input, minimum, maximum):
             if user_input.lower() != minimum and user_input.lower() != maximum:
                 user_input = input("Please choose either " + minimum + " or " + maximum + ". ")
             else:
-                return int(user_input)
+                return str(user_input)
     elif int(minimum) == minimum and int(maximum) == maximum:
         while not valid_input:
             try:
@@ -21,7 +21,7 @@ def check_input(user_input, minimum, maximum):
                 if user_input <= minimum or user_input >= maximum:
                     user_input = input("Please choose an integer between " + minimum + " and " + maximum)
                 else:
-                    return str(user_input)
+                    return int(user_input)
             except ValueError:
                 user_input = input("Please choose an integer between " + minimum + " and " + maximum)
 
@@ -70,7 +70,6 @@ def create_board():
     size = check_input(size, 1, 9)
     global board
     board = [["--"] * int(size)] * int(size)
-    print(size + str(board))
     print_board()
 
 
@@ -78,10 +77,10 @@ def print_board():
     # print("__________")
     global board
 
-    print(int(len(board)))
     for i in range(int(len(board))):
         for a in range(int(len(board))):
-            # if a == int(math.sqrt(len(board)))
+            # if a == 0:
+            #
             if a == int(len(board)) - 1:
                 print("|" + "--" + "|" + "\n", end="")
             else:
