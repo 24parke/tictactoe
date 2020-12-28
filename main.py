@@ -18,12 +18,12 @@ def check_input(user_input, minimum, maximum):
         while not valid_input:
             try:
                 user_input = int(user_input)
-                if user_input <= minimum or user_input >= maximum:
-                    user_input = input("Please choose an integer between " + minimum + " and " + maximum)
+                if user_input < minimum or user_input > maximum:
+                    user_input = input(f'Please choose an integer between {minimum} and {maximum}: ')
                 else:
                     return int(user_input)
             except ValueError:
-                user_input = input("Please choose an integer between " + minimum + " and " + maximum)
+                user_input = input(f'Please choose an integer between {minimum} and {maximum}: ')
 
 
 def flip_coin(name1, name2):
@@ -79,12 +79,14 @@ def print_board():
 
     for i in range(int(len(board))):
         for a in range(int(len(board))):
+            # make the top and bottom borders on the grid using ---------------
             # if a == 0:
             #
             if a == int(len(board)) - 1:
-                print("|" + "--" + "|" + "\n", end="")
+                if ()
+                print(f'| {(a + 1) * (i + 1)} | \n', end="")
             else:
-                print("|" + "--", end="")
+                print(f'| {(a + 1) * (i + 1)}', end="")
     # print("----------\n")
 
 
