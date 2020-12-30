@@ -1,17 +1,17 @@
 import random
 import math
 
-
-# board = None
-# starting_player = None
-# other_player = None
-# sp_marker = None
-# op_marker = None
 global board
-global starting_player
-global other_player
-global sp_marker
-global op_marker
+starting_player = None
+other_player = None
+sp_marker = None
+op_marker = None
+d_board = {}
+# global starting_player
+# global other_player
+# global sp_marker
+# global op_marker
+# global board
 
 # ========================== HELPER FUNCTIONS ============================
 
@@ -63,49 +63,100 @@ def flip_coin(name1, name2):
             return name1
 
 
-# ========================== BOARD SETTINGS (size) / USER INPUT===========
+# ========================== BOARD SETTINGS (size) / USER INPUT ==========
 
 def create_board():
     global board
+    global d_board
     size = input("Size of board: ")
     size = check_input(size, 1, 9)
     board = [["--"] * int(size)] * int(size)
-    print(board)
     print_board()
+
+    for i in range(size):
+        for a in range(size):
+            d_board[a + (size * i) + 1] = board[i][a]
 
 
 def print_board():
-    # print("__________")
-    # global board
-    for i in range(int(len(board))):
-        for a in range(int(len(board))):
-            # make the top and bottom borders on the grid using ---------------
-            # if a == 0:
-            #
-            if a == int(len(board)) - 1:
-                if (a + 1) * (i + 1) >= 10:
-                    print(f'|{(a + 1) * (i + 1)}|\n', end="")
+    board_length = int(len(board))
+    for i in range(board_length):
+        for a in range(board_length):
+            xd = a + (board_length * i) + 1
+            if a == board_length - 1:
+                if xd >= 10:
+                    print(f'|{xd}|\n', end="")
                 else:
-                    print(f'|0{(a + 1) * (i + 1)}|\n', end="")
+                    print(f'|0{xd}|\n', end="")
             else:
-                if (a + 1) * (i + 1) >= 10:
-                    print(f'|{(a + 1) * (i + 1)}', end="")
+                if xd >= 10:
+                    print(f'|{xd}', end="")
                 else:
-                    print(f'|0{(a + 1) * (i + 1)}', end="")
-    # print("----------\n")
+                    print(f'|0{xd}', end="")
 
+# ========================== PLAYER MOVES =================================
+
+
+def user_move():
+    global d_board
+    print(d_board)
+    end = False
+    while not end:
+        move = input(f'{starting_player}: ')
+        move = check_input(move, 1, len(board) ** 2)
+        print(d_board.get(d_board[move]))
+        print(d_board.get(d_board[9]))
+        board[d_board.get(d_board[move])][d_board.get(d_board[move])] = "XX"
+        if check_win(d_board[move]):
+            end = True
+            break
+        else:
+            move = input(f'{other_player}: ')
+            move = check_input(move, 1, len(board) ** 2)
+            board[d_board[move]][d_board[move]] = "OO"
+            if check_win(d_board[move]):
+                end = True
+                break
+
+
+def check_win(move):
+    horizontal = []
+    vertical = []
+    diagonal = []
+    # for h_counter in range(len(TicTacToe.board)):
+    #     horizontal.append(TicTacToe.board[move + h_counter])
+    #     for v_counter in range(len(TicTacToe.board)):
+    #         vertical.append(TicTacToe.board[move][move + v_counter])
+    #         diagonal.append(TicTacToe.board[move + h_counter][move + v_counter])
+    # for h_counter in range(len(TicTacToe.board)):
+    #     if
+    #     for v_counter in range(len(TicTacToe.board)):
+    #         if
+
+    if board[move] == "XX":
+        return True
+    elif board[move]:
+        return True
+    elif board:
+        return True
+    else:
+        return False
 
 # ========================== ACTUAL GAME =================================
 
 
 def start():
     create_board()
-    global sp_marker
-    global op_marker
+
+    global starting_player
+    global other_player
+
     p1 = input("Player 1 name: ")
     p2 = input("Player 2 name: ")
-    sp_marker = "XX"
-    op_marker = "OO"
+    starting_player = p1
+    other_player = p2
+
+    # user_move()
     user_move()
 
 
@@ -122,50 +173,57 @@ def start():
 start()
 
 
-class TicTacToe:
-    board = None
-    starting_player = None
-    other_player = None
-    def __init__(self, board, starting_player, other_player):
-        self.board = board
-        self.starting_player = starting_player
-        self.other_player = other_player
 
 
-    create_board()
-    p1 = input("Player 1 name: ")
-    p2 = input("Player 2 name: ")
-    flip_coin(p1, p2)
 
-    def check_win(self, move):
-        horizontal = []
-        vertical = []
-        diagonal = []
-        for h_counter in range(len(TicTacToe.board)):
-            horizontal.append(TicTacToe.board[move + h_counter])
-            for v_counter in range(len(TicTacToe.board)):
-                vertical.append(TicTacToe.board[move][move + v_counter])
-                diagonal.append(TicTacToe.board[move + h_counter][move + v_counter])
-        if TicTacToe.board[move] == "XX":
-            return True
-        elif TicTacToe.board[move]:
-            return True
-        elif TicTacToe.board:
-            return True
-        else:
-            return False
+# class TicTacToe:
+#     board = None
+#     starting_player = None
+#     other_player = None
+#
+#     def __init__(self, board, starting_player, other_player):
+#         self.board = board
+#         self.starting_player = starting_player
+#         self.other_player = other_player
+#
+#     create_board()
+#     p1 = input("Player 1 name: ")
+#     p2 = input("Player 2 name: ")
+#     p1 = p1 + "[XX]"
+#     p2 = p2 + "[OO]"
+#     flip_coin(p1, p2)
+#     user_move()
 
 
-    def user_move(self):
-        end = False
-        while not end:
-            move = input(f'{starting_player}: ')
-            check_input(move, 1, len(board) ** 2)
-            board[move][move] = "XX"
-            if check_win(move):
-                end = True
-                break
-            else:
-                move = input(f'{other_player}: ')
-                check_input(move, 1, len(board) ** 2)
-                TicTacToe.board[move][move] = "OO"
+    # def check_win(self, move):
+    #     horizontal = []
+    #     vertical = []
+    #     diagonal = []
+    #     for h_counter in range(len(TicTacToe.board)):
+    #         horizontal.append(TicTacToe.board[move + h_counter])
+    #         for v_counter in range(len(TicTacToe.board)):
+    #             vertical.append(TicTacToe.board[move][move + v_counter])
+    #             diagonal.append(TicTacToe.board[move + h_counter][move + v_counter])
+    #     if TicTacToe.board[move] == "XX":
+    #         return True
+    #     elif TicTacToe.board[move]:
+    #         return True
+    #     elif TicTacToe.board:
+    #         return True
+    #     else:
+    #         return False
+
+
+# def user_move():
+#     end = False
+#     while not end:
+#         move = input(f'{starting_player}: ')
+#         check_input(move, 1, len(board) ** 2)
+#         board[move][move] = "XX"
+#         if check_win(move):
+#             end = True
+#             break
+#         else:
+#             move = input(f'{other_player}: ')
+#             check_input(move, 1, len(board) ** 2)
+#             TicTacToe.board[move][move] = "OO"
