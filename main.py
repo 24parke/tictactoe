@@ -7,6 +7,7 @@ other_player = None
 sp_marker = None
 op_marker = None
 d_board = {}
+d1 = {}
 # global starting_player
 # global other_player
 # global sp_marker
@@ -75,7 +76,8 @@ def create_board():
 
     for i in range(size):
         for a in range(size):
-            d_board[a + (size * i) + 1] = board[i][a]
+            d_board[a + (size * i) + 1] = i
+            d1[a + (size * i) + 1] = a
 
 
 def print_board():
@@ -98,15 +100,13 @@ def print_board():
 
 
 def user_move():
-    global d_board
-    print(d_board)
+    global board
     end = False
     while not end:
         move = input(f'{starting_player}: ')
         move = check_input(move, 1, len(board) ** 2)
-        print(d_board.get(d_board[move]))
-        print(d_board.get(d_board[9]))
-        board[d_board.get(d_board[move])][d_board.get(d_board[move])] = "XX"
+        board[d_board[move]][d1[move]] = "XX"
+        print(board[d_board[move]][d1[move]])
         if check_win(d_board[move]):
             end = True
             break
@@ -120,27 +120,18 @@ def user_move():
 
 
 def check_win(move):
-    horizontal = []
-    vertical = []
-    diagonal = []
-    # for h_counter in range(len(TicTacToe.board)):
-    #     horizontal.append(TicTacToe.board[move + h_counter])
-    #     for v_counter in range(len(TicTacToe.board)):
-    #         vertical.append(TicTacToe.board[move][move + v_counter])
-    #         diagonal.append(TicTacToe.board[move + h_counter][move + v_counter])
-    # for h_counter in range(len(TicTacToe.board)):
-    #     if
-    #     for v_counter in range(len(TicTacToe.board)):
-    #         if
-
-    if board[move] == "XX":
-        return True
-    elif board[move]:
-        return True
-    elif board:
-        return True
-    else:
-        return False
+    global board
+    spot = board[d_board[move]][d_board[move]]
+    for h_counter in d_board:
+        print(h_counter)
+    # if spot == "XX" and :
+    #     return True
+    # elif board[move]:
+    #     return True
+    # elif board:
+    #     return True
+    # else:
+    #     return False
 
 # ========================== ACTUAL GAME =================================
 
